@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Express!!!</title>
+  <script src="js/jquery-1.11.3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js" charset="utf-8"></script>
+  <script src="js/main.js" charset="utf-8"></script>
+</head>
+<body>
+  <form id="create-user" action="/users" method="post" class="sign-up">
+    <label for="username">Username:</label>
+    <input type="text" name="user[username]" placeholder="username" class="form-control">
+    <label for="password">Password:</label>
+    <input type="password" name="user[password]" placeholder="password" class="form-control">
+    <input type="submit" class="btn btn-primary" value="Create User">
+  </form>
+
+  <form id='log-in' action="/users/authenticate" method="post">
+    <label for="username">Username:</label>
+    <input type="text" name="username" placeholder="username" required>
+    <label for="password">Password:</label>
+    <input type="password" name="password" placeholder="password" required>
+    <input type="submit" class="btn btn-primary" value="Log In">
+  </form>
+
+  <button id="log-out">Log Out!</button>
+
+  <div class="add-post">
+    <form action="/postings/new" id="new-post">
+      <input type="text" name="game" placeholder="Game">
+      <input type="text" name="location" placeholder="Location">
+      <input type="submit" value="Add Post">
+    </form>
+  </div>
+
+  <div class="all-posts">
+    <ul id="post-list">
+    </ul>
+  </div>
+
+
+</body>
+</html>

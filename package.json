@@ -1,0 +1,23 @@
+{
+  "name": "expressapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "dotenv": "^2.0.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.3.7",
+    "morgan": "^1.6.1",
+    "request": "^2.69.0",
+    "xml2js": "^0.4.16"
+  }
+}
