@@ -1,0 +1,12 @@
+#map {
+  height: 500px;
+  width: 500px;
+  background-color: black;
+  color: red;
+  float: right;
+  border: 1px solid goldenrod;
+}
+
+.handle-post {
+  border: 1px solid black;
+}

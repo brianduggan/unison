@@ -3,9 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Express!!!</title>
+  <link rel="stylesheet" href="/css/styles.css" media="screen" title="no title" charset="utf-8">
   <script src="js/jquery-1.11.3.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpMcVJo8Lcg2KEHsKYRp6hGtyJBxBoVVs"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <script src="js/googlemaps.js" charset="utf-8"></script>
   <script src="js/main.js" charset="utf-8"></script>
+  <script type="text/x-handlebars-template" id="posts">
+    <h1>All the Posts!!!</h1>
+    {{#each postings}}
+      <div class="handle-post">
+        <h4>{{ game }}</h4>
+        <a href="#" class="get-info" data-name="{{game}}">Get Some Info</a>
+        {{#if user_id}}
+          <h4>{{user_id.username}}</h4>
+          <h5>{{location}}</h5>
+        {{/if}}
+        {{#if location}}
+          <a href="#" class='get-location'>Get Location</a></br>
+        {{/if }}
+        {{cookie this}}
+          <div class="game-info"></div>
+      </div>
+    {{/each}}
+  </script>
 </head>
 <body>
   <form id="create-user" action="/users" method="post" class="sign-up">
@@ -27,6 +49,7 @@
   <button id="log-out">Log Out!</button>
 
   <div class="add-post">
+    <h3>Add a Post</h3>
     <form action="/postings/new" id="new-post">
       <input type="text" name="game" placeholder="Game">
       <input type="text" name="location" placeholder="Location">
@@ -34,9 +57,20 @@
     </form>
   </div>
 
-  <div class="all-posts">
+  <div id="map"></div>
+
+  <!-- <div class="all-posts">
+    <h3>All Posts</h3>
     <ul id="post-list">
     </ul>
+  </div> -->
+
+  <div class="post-games">
+
+  </div>
+
+  <div id="all-users">
+
   </div>
 
 

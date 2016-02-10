@@ -47,13 +47,39 @@ router.get('/taco', function(req, res) {
   var gameId = 0;
   request(xml, function(err, response, body){
     parseString(body, function(err, result){
-      gameId = result.items.item[0].$.id;
-      var xml2 =  'https://www.boardgamegeek.com/xmlapi2/thing?=boardgame&id='+gameId+'&stats=1'
-      request(xml2, function(err2, response2, body2){
-        parseString(body2, function(err2, result2){
-          res.json(result2.items.item[0]);
+      gameId = result.items.item[0].$.id; //Should make it so multiple results come up
+      var results = result.items.item;
+      var fiveResults = [];
+      for (var i = 0; i < 5; i++) {
+        var resultObj = {id: results[i].$.id, name: results[i].name[0].$.value}
+        fiveResults.push(resultObj);
+      }
+      console.log(fiveResults);
+
+      // fiveResults.forEach(function(game){
+      //   var gameId = game.id;
+      //   var gameName = game.name
+      //   console.log(gameId+' '+gameName)
+      // });
+      // res.json(fiveResults);
+      // send fiveResults back as links or something... then they can click to make a request to the below...
+      var finalResults = [];
+      fiveResults.forEach(function(result){
+        var xml2 =  'https://www.boardgamegeek.com/xmlapi2/thing?=boardgame&id='+result.id+'&stats=1';
+        console.log(result.id);
+        request(xml2, function(err2, response2, body2){
+          parseString(body2, function(err2, result2){
+            console.log(result2);
+            finalResults.push(result2);
+            console.log("This is Final "+finalResults);
+            if (finalResults.length > 4){
+              console.log("All Done!");
+              res.json(finalResults);
+            }
+          });
         });
       });
+      console.log(finalResults.length);
     });
   });
 

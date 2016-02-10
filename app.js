@@ -2,9 +2,8 @@
 var express = require('express');
 var app = express();
 
-app.set('view engine', 'ejs');
-
 require('dotenv').config();
+app.set('view engine', 'ejs');
 
 var mongoPath = process.env.MONGOLAB_URI || 'mongodb://localhost/expressApp'
 var mongoose = require('mongoose');

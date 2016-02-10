@@ -17,4 +17,11 @@ router.get('/', function(req,res){
   }).populate('user_id');
 });
 
+router.delete('/:id', function(req, res){
+  var postId = req.params.id;
+  Posting.findByIdAndRemove(postId, function(err){
+    res.status(204).end();
+  })
+});
+
 module.exports = router;
