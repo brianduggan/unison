@@ -31,7 +31,7 @@ function logInHandler(){
     var passwordValue = $passwordField.val();
     logIn(usernameValue, passwordValue, function(){
       console.log('The token is: '+ $.cookie('token') + '\nThe user id is: '+ $.cookie('user_id'));
-      getPosts();
+      handlebarsPost();
       getAllUsers();
       $('form#log-in').hide();
       $('form#create-user').hide();

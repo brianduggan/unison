@@ -19,13 +19,9 @@ function getLocation(location){
 var myMap = {};
 
 function masterMap(locations){
-
   myMap.init = function(){
     this.map;
     this.currentLatLng;
-    this.zoom;
-    this.mapEl;
-
     this.zoom = 15;
     this.mapEl = document.querySelector('#map');
 
