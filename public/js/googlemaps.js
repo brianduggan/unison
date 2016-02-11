@@ -21,12 +21,9 @@ var myMap = {};
 function masterMap(locations){
   myMap.init = function(){
     this.map;
-    this.currentLatLng;
     this.zoom = 15;
     this.mapEl = document.querySelector('#map');
-
     this.currentLatLng = new google.maps.LatLng(40.6784471, -73.9653714);
-
     this.map = new google.maps.Map( this.mapEl, {
       center: this.currentLatLng,
       zoom: this.zoom,

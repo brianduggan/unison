@@ -33,12 +33,14 @@ function logInHandler(){
       console.log('The token is: '+ $.cookie('token') + '\nThe user id is: '+ $.cookie('user_id'));
       handlebarsPost();
       getAllUsers();
+      masterMapDisplayer();
       $('form#log-in').hide();
       $('form#create-user').hide();
       $('#log-out').show();
       $('.add-post').show();
       $('.post-games').show();
       $('#all-users').show();
+      $('#map').show();
     });
   });
 }
@@ -58,6 +60,7 @@ function onloadGetter(){
     $('form#create-user').hide();
     $('.add-post').show();
     $('.post-games').show();
+    $('#map').show();
   } else { // Refactor Later... give things that should be visible on sign in a similar class
     $('form#log-in').show();
     $('form#create-user').show();
@@ -65,6 +68,7 @@ function onloadGetter(){
     $('.add-post').hide();
     $('.post-games').hide();
     $('#all-users').hide();
+    $('#map').hide();
   }
 }
 
