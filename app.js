@@ -32,10 +32,6 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
-app.get('/googlec908cbbe1d66732f.html', function(req,res){
-  res.render('googlec908cbbe1d66732f');
-})
-
 //******** LISTENING @ ********//
 
 var port = process.env.PORT || 3000;
