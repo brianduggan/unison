@@ -33,7 +33,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/googlec908cbbe1d66732f.html', function(req,res){
-  res.render('googlec908cbbe1d66732f.html');
+  res.render('googlec908cbbe1d66732f');
 })
 
 //******** LISTENING @ ********//
