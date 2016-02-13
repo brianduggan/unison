@@ -1,11 +1,27 @@
-Handlebars.registerHelper('cookie', function(element){
+Handlebars.registerHelper('deleteMe', function(element){
   var cookie = $.cookie('user_id');
   console.log(element)
   if (cookie === element.user_id._id){
-    var el = new Handlebars.SafeString('<a href="#" class="delete-posting" data-post-id="'+element._id+'">Delete Me</a>')
+    var el = new Handlebars.SafeString('<a href="#" class="update-posting"><span class="font-awesome-icon">&#xf062;</span>Update</a><a href="#" class="delete-posting" data-post-id="'+element._id+'"><i class="fa fa-minus-circle"></i>Delete</a>')
     console.log(el);
     return el
   }
+})
+
+Handlebars.registerHelper('updateMe', function(element){
+  var cookie = $.cookie('user_id');
+  if (cookie === element.user_id._id){
+    var el = new Handlebars.SafeString('<form class="update-post-form" data-post-id="'+element._id+'"><input type="text" name="game" placeholder="Game" value="'+element.game+'" required><input type="text" name="locationName" placeholder="Place Name" value="'+element.locationName+'" required><input type="text" name="location" placeholder="Location" value="'+element.location+'" required><input type="text" name="players" placeholder="Players Needed" value="'+element.players+'" required><input type="submit" value="Update Post"></form>')
+    console.log(el);
+    return el
+  }
+})
+
+Handlebars.registerHelper('capitalize', function(words){
+  var wordArray = words.split("");
+  var firstLetterCap = words.split(" ")[0].split("")[0].toUpperCase();
+  wordArray[0] = firstLetterCap;
+  return wordArray.join('');
 })
 
 //////// LOG-IN FUNCTIONALITY ////////
@@ -23,7 +39,7 @@ function logIn(usernameTry, passwordTry, callback){
 }
 
 function logInHandler(){
-  $('form#log-in').on('submit', function(e){
+  $('form#log-in-form').on('submit', function(e){
     e.preventDefault();
     var $usernameField = $(this).find('input[name="username"]');
     var usernameValue = $usernameField.val();
@@ -34,13 +50,9 @@ function logInHandler(){
       handlebarsPost();
       getAllUsers();
       masterMapDisplayer();
-      $('form#log-in').hide();
-      $('form#create-user').hide();
-      $('#log-out').show();
-      $('.add-post').show();
-      $('.post-games').show();
-      $('#all-users').show();
-      $('#map').show();
+      $('.logged-in').show();
+      $('.logged-out').hide();
+      $('.log-toggle').hide();
     });
   });
 }
@@ -55,79 +67,20 @@ function logOutHandler(){
 }
 
 function onloadGetter(){
-  if ($.cookie('token')){ // Refactor Later... give things that should be visible on sign in a similar class
-    $('form#log-in').hide();
-    $('form#create-user').hide();
-    $('.add-post').show();
-    $('.post-games').show();
-    $('#map').show();
-  } else { // Refactor Later... give things that should be visible on sign in a similar class
-    $('form#log-in').show();
-    $('form#create-user').show();
-    $('#log-out').hide();
-    $('.add-post').hide();
-    $('.post-games').hide();
-    $('#all-users').hide();
-    $('#map').hide();
+  if ($.cookie('token')){
+    $('.logged-in').show();
+    $('.logged-out').hide();
+    $('.log-toggle').hide();
+  } else {
+    $('.logged-in').hide();
+    $('.logged-out').show();
+    $('.log-toggle').hide();
   }
 }
 
 
-
-// function renderPosts(postings){
-//     var posts = postings.postings;
-//     var $container = $('ul#post-list');
-//     $container.empty();
-//     // IN POSTS.EACH... ADD AN IF COOKIETOKEN !== POST.USER_ID.ID... THEN DISPLAY MAKE FRIEND OPTION
-//     posts.forEach(function(post){
-//       console.log(post);
-//       var $el = $('<li>');
-//       $el.append( $('<h4>').text(post.game) );
-//       $el.append( $('<a href="#" class="get-info" data-name="'+post.game+'">').text("Get some info on this game"));
-//       if (post.user_id){
-//         $el.append( $('<h4>').text(post.user_id.username) );
-//         $el.append( $('<h5>').text(post.location) );
-//       }
-//       if(post.location){
-//         $el.append( $('<a href="#" class="get-location">').text("Get Location") );
-//       }
-//       var cookieToken = $.cookie('user_id');
-//       if (cookieToken === post.user_id._id){ /////FIX THIS!!!!!!!!!!!!!!!!!!
-//         $el.append( $('<a href="#" class="delete-posting" data-post-id="'+post._id+'">').text("Delete Me") );
-//       }
-//       var $infoDiv = $('<div class="game-info">');
-//       $container.append($el);
-//       $el.append($infoDiv);
-//     })
-// }
-
-
-function newPostHandler(){
-  $('form#new-post').on('submit', function(e){
-    e.preventDefault();
-    var userId = $.cookie('user_id');
-    var $gameField = $(this).find('input[name="game"]');
-    var gameValue = $gameField.val();
-    var $locationField = $(this).find('input[name="location"]');
-    var locationValue = $locationField.val();
-    var postingData = {game: gameValue, location: locationValue, user_id: userId};
-    $.ajax({
-      method: 'post',
-      url: '/postings/new',
-      data: postingData,
-      success: function(){
-        handlebarsPost();
-        masterMapDisplayer();
-      }
-    })
-    $gameField.val("");
-    $locationField.val("");
-  });
-}
-
-
-function displayPostInfoResults(response, div){
-  var $infoDiv = div.parent().find('.game-info');
+function displayPostInfoResults(response){
+  var $infoDiv = $('.game-info');
   $infoDiv.empty();
   response.forEach(function(result){
     var mainDestination = result.items.item[0];
@@ -145,7 +98,7 @@ function postInfoHandler(){
   $('.post-games').on('click', '.get-info', function(e){
     e.preventDefault();
     var $self = $(this);
-    var $infoDiv = $self.parent().find('.game-info');
+    var $infoDiv = $('.game-info');
     $infoDiv.append( "LOADING!!!" );
     var nameGame = $self.data('name');
     $.ajax({
@@ -153,23 +106,7 @@ function postInfoHandler(){
       url: '/users/taco',
       data: {name: nameGame},
       success: function(response){
-        displayPostInfoResults(response, $self);
-      }
-    })
-  })
-}
-
-function deletePostsHandler(){
-  $('.post-games').on('click', '.delete-posting', function(e){
-    e.preventDefault();
-    console.log("Hello There Deleter");
-    var postId = $(this).data('post-id');
-    console.log(postId);
-    $.ajax({
-      method: 'delete',
-      url: '/postings/' + postId,
-      success: function(){
-        handlebarsPost();
+        displayPostInfoResults(response);
       }
     })
   })
@@ -178,7 +115,8 @@ function deletePostsHandler(){
 function getMapHandler(){
   $('.post-games').on('click', '.get-location', function(e){
     e.preventDefault();
-    var location = $(this).prev().text();
+    var location = $(this).parent().find('.map-location').text();
+    console.log(location)
     centerMap(location);
   })
 }
@@ -233,6 +171,54 @@ function handlebarsPost(){
   });
 }
 
+function usersDisplayHandler(){
+  $('.users-link').on('click', function(){
+    $('#all-users').toggle();
+  })
+}
+
+function addPostDisplayHandler(){
+  $('.post-link').on('click', function(){
+    $('.add-post').toggle();
+  })
+}
+
+function createAccountHandler(){
+  $('.drop-account').on('click', function(e){
+    e.preventDefault();
+    $('#log-in').slideToggle();
+    $('#create-account').slideToggle();
+  })
+}
+
+function signInHandler(){
+  $('.go-to-log').on('click', function(e){
+    e.preventDefault();
+    $('#log-in').slideToggle();
+    $('#create-account').slideToggle();
+  })
+}
+
+function profileLinkHandler(){
+  $('.profile-link').on('click', function(){
+    var userId = $.cookie('user_id');
+    $.ajax({
+      method: 'get',
+      url: '/users/' + userId,
+      success: function(response){
+        var source = $('#update-profile-template').html();
+        var template = Handlebars.compile(source);
+        var user = response.user[0];
+        var compiledHTML = template(user);
+        $('.update-profile-container').empty();
+        $('.update-profile-container').append(compiledHTML);
+        $('.update-profile-container').toggle();
+      }
+    })
+  });
+}
+
+
 
 
 $(function(){
@@ -240,13 +226,16 @@ $(function(){
   logInHandler();
   logOutHandler();
   onloadGetter();
-  newPostHandler();
   postInfoHandler();
-  deletePostsHandler();
   getMapHandler();
   getAllUsers();
   masterMapDisplayer();
   handlebarsPost();
+  usersDisplayHandler();
+  addPostDisplayHandler();
+  createAccountHandler();
+  signInHandler();
+  profileLinkHandler();
 
 });
 

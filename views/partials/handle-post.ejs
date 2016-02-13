@@ -1,0 +1,53 @@
+<script type="text/x-handlebars-template" id="posts">
+  {{#each postings}}
+    <div class="handle-post panel panel-default">
+
+      <div class="panel-heading">
+        <h4>{{ capitalize game }}</h4>
+        <a href="#" class="get-info" data-name="{{game}}"><span class="font-awesome-icon">&#xf05a;</span></a>
+      </div>
+
+      <div>
+        {{#if user_id}}
+          <h4>{{capitalize user_id.username}}</h4>
+          {{#if locationName}}
+            <h4>{{capitalize locationName}}</h4>
+          {{/if}}
+          <h5 class="map-location">{{capitalize location}}</h5>
+        {{/if}}
+        {{#if players}}
+          <h6>Players Needed: {{capitalize players}}</h6>
+        {{/if}}
+        {{#if location}}
+          <a href="#" class='get-location'><i class="fa fa-map-signs"></i></a></br>
+        {{/if }}
+        {{#if user_id.email}}
+          <a href="mailto:{{user_id.email}}?Subject=A%20Unison%20gamer%20wants%20to%20play%20{{game}}"><span class="font-awesome-icon">&#xf0e0;</span></a>
+        {{/if}}
+        {{deleteMe this}}
+      </div>
+
+      <div class="update-post">
+        {{updateMe this}}
+      </div>
+
+    </div>
+  {{/each}}
+</script>
+
+
+<script type="text/x-handlebars-template" id="update-profile-template">
+  <div class="panel-heading">
+    <h3>{{username}}'s Profile</h3>
+  </div>
+  
+  <h5>Birthdate: {{birthdate}}</h5>
+  <h5>Favorite Games: {{favoriteGames}}</h5>
+  <h5>E-Mail: {{email}}</h5>
+
+  <form class="update-profile-form">
+    <input type="text" name="favoriteGames" value="{{favoriteGames}}" placeholder="Favorite Games">
+    <input type="text" name="email" value="{{email}}" placeholder="E-Mail">
+    <input type="submit" value="Update Profile">
+  </form>
+</script>

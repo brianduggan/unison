@@ -1,5 +1,5 @@
 function getLocation(location){
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyAtQeWl-x_C9eL4oyWNKiiuCyOrtG2E-6I';
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyBP1jvg8jCcMuZidBGFeQVET037VcVOF78';
   console.log(location);
   var coordinates = {};
   $.ajax({
@@ -31,7 +31,7 @@ function masterMap(locations){
     });
 
   locations.postings.forEach(function(loc){
-    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +loc.location+ '&key=AIzaSyAtQeWl-x_C9eL4oyWNKiiuCyOrtG2E-6I';
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +loc.location+ '&key=AIzaSyBP1jvg8jCcMuZidBGFeQVET037VcVOF78';
     var coordinates = {};
     $.ajax({
       method: 'get',
@@ -69,7 +69,7 @@ function masterMap(locations){
 
 
 function centerMap(location){
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyAtQeWl-x_C9eL4oyWNKiiuCyOrtG2E-6I';
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyBP1jvg8jCcMuZidBGFeQVET037VcVOF78';
   $.ajax({
     method: 'get',
     url: url,

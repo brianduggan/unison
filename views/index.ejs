@@ -1,84 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="google-site-verification" content="UsNfD2V7WEaFTC6_oFz2dRNcDFa4CoQOUX0fe65xYW0" />
-  <title>Express!!!</title>
-  <link rel="stylesheet" href="/css/styles.css" media="screen" title="no title" charset="utf-8">
-  <script src="js/jquery-1.11.3.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpMcVJo8Lcg2KEHsKYRp6hGtyJBxBoVVs"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js" charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-  <script src="js/googlemaps.js" charset="utf-8"></script>
-  <script src="js/main.js" charset="utf-8"></script>
-  <script type="text/x-handlebars-template" id="posts">
-    <h1>All the Posts!!!</h1>
-    {{#each postings}}
-      <div class="handle-post">
-        <h4>{{ game }}</h4>
-        <a href="#" class="get-info" data-name="{{game}}">Get Some Info</a>
-        {{#if user_id}}
-          <h4>{{user_id.username}}</h4>
-          <h5>{{location}}</h5>
-        {{/if}}
-        {{#if location}}
-          <a href="#" class='get-location'>Get Location</a></br>
-        {{/if }}
-        {{cookie this}}
-          <div class="game-info"></div>
-      </div>
-    {{/each}}
-  </script>
+  <% include ./partials/head %>
 </head>
 <body>
+
   <header>
-    <h1>Unison</h1>
+    <i class="fa fa-puzzle-piece fa-3x"></i><h1>Unison</h1>
+    <p class="profile-link logged-in">Profile</p>
+    <p class="post-link logged-in">Add Game Post</p>
+    <p class="users-link logged-in">Users</p>
+    <button id="log-out" class="btn-info logged-in">Log Out!</button>
   </header>
 
+  <div class="container">
+    <div id="log-in" class="logged-out">
+      <h2>Welcome to Unison!</h2>
+      <form id='log-in-form' action="/users/authenticate" method="post">
+        <label for="username">Username:</label>
+        <input type="text" name="username" placeholder="username" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="password" required>
+        <input type="submit" class="btn btn-primary" value="Log In">
+      </form>
+      <a href="#" class="drop-account">Don't Have an Account? Click Here to Sign Up!</a>
+    </div>
 
-  <form id="create-user" action="/users" method="post" class="sign-up">
-    <label for="username">Username:</label>
-    <input type="text" name="user[username]" placeholder="username" class="form-control">
-    <label for="password">Password:</label>
-    <input type="password" name="user[password]" placeholder="password" class="form-control">
-    <input type="submit" class="btn btn-primary" value="Create User">
-  </form>
+    <div id="create-account" class="log-toggle">
+      <form id="create-user-form" action="/users" method="post" class="sign-up">
+        <label for="username">Username:</label>
+        <input type="text" name="user[username]" placeholder="username" class="form-control" required>
+        <label for="password">Password:</label>
+        <input type="password" name="user[password]" placeholder="password" class="form-control" required>
+        <label for="birthdate">Birthdate:</label>
+        <input type="date" name="user[birthdate]" placeholder="birthdate" class="form-control" required>
+        <label for="favoriteGames">Favorite Games:</label>
+        <input type="text" name="user[favoriteGames]" placeholder="favorite games" class="form-control">
+        <label for="email">E-Mail:</label>
+        <input type="email" name="user[email]" placeholder="email" class="form-control" required>
+        <input type="submit" class="btn btn-primary" value="Create User">
+      </form>
+      <a href="#" class="go-to-log">Nevermind, I have one!</a>
+    </div>
 
-  <form id='log-in' action="/users/authenticate" method="post">
-    <label for="username">Username:</label>
-    <input type="text" name="username" placeholder="username" required>
-    <label for="password">Password:</label>
-    <input type="password" name="password" placeholder="password" required>
-    <input type="submit" class="btn btn-primary" value="Log In">
-  </form>
+    <div class="add-post log-toggle panel panel-default">
+      <div class="panel-heading">
+        <h3>Add a Game Post</h3>
+      </div>
+      <form action="/postings/new" id="new-post">
+        <input type="text" name="game" placeholder="Game" required>
+        <input type="text" name="locationName" placeholder="Place Name" required>
+        <input type="text" name="location" placeholder="Location" required>
+        <input type="text" name="players" placeholder="Players Needed" required>
+        <input type="submit" value="Add Post">
+      </form>
+    </div>
 
-  <button id="log-out">Log Out!</button>
+    <!-- GOOGLE MAP -->
+    <div id="map-container" class="logged-in"><div id="map" class="logged-in"></div></div>
 
-  <div class="add-post">
-    <h3>Add a Post</h3>
-    <form action="/postings/new" id="new-post">
-      <input type="text" name="game" placeholder="Game">
-      <input type="text" name="location" placeholder="Location">
-      <input type="submit" value="Add Post">
-    </form>
+    <!-- PROFILE -->
+    <div class="update-profile-container panel panel-default"></div>
+
+    <!-- WHERE POSTS GO -->
+    <div class="post-games logged-in"></div>
+
+    <!-- GAME INFO MODAL -->
+    <div class="game-info"></div>
+
+    <!-- USERS LIST -->
+    <div id="all-users" class="logged-in log-toggle"></div>
+
   </div>
-
-  <div id="map"></div>
-
-  <!-- <div class="all-posts">
-    <h3>All Posts</h3>
-    <ul id="post-list">
-    </ul>
-  </div> -->
-
-  <div class="post-games">
-
-  </div>
-
-  <div id="all-users">
-
-  </div>
-
-
 </body>
 </html>

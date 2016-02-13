@@ -1,3 +1,27 @@
+/* COLORS
+  #01BAEF - Light Blue
+  #0CBABA - Seafoamish
+  #380036 - Purple
+  #26081C - Somehow even darker purple
+  #150811 - Black
+*/
+
+body {
+  background-color: #01BAEF;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.font-awesome-icon {
+  font-family: FontAwesome;
+}
+
+/************** MAP **************/
+#map-container {
+  position: fixed;
+  top: 20%;
+  right: 2%;
+}
+
 #map {
   height: 500px;
   width: 500px;
@@ -6,10 +30,92 @@
   border: 1px solid goldenrod;
 }
 
-body {
-  background-color:
+/************** END MAP **************/
+
+/************** HEADER **************/
+header {
+  position: fixed;
+  height: 80px;
+  top: 0;
+  background-color: #26081C;
+  width: 100%;
+  color: #0CBABA;
 }
 
-.handle-post {
-  border: 1px solid black;
+header i, h1 {
+  display: inline-block;
+  margin-left: 2%;
 }
+
+header a {
+  text-decoration: none;
+  color: #0CBABA;
+}
+
+header h1 {
+  font-family: 'Unica One', cursive;
+  font-size: 3em;
+}
+
+header button {
+  position: fixed;
+  top: 29px;
+  right: 2%;
+  border-radius: 10px;
+}
+
+.post-link {
+  position: fixed;
+  top: 35px;
+  right: 230px;
+  border-bottom: 2px solid #01BAEF;
+}
+
+.users-link {
+  position: fixed;
+  top: 35px;
+  right: 120px;
+  border-bottom: 2px solid #01BAEF;
+}
+.profile-link {
+  position: fixed;
+  top: 35px;
+  right: 170px;
+  border-bottom: 2px solid #01BAEF;
+}
+
+/************** END MAP **************/
+.container {
+  margin: 100px auto;
+  width: 95%;
+}
+
+.add-post {
+  position: fixed;
+  top: 85px;
+  right: 2%;
+  border: 1px solid black;
+  z-index: 3;
+}
+
+.update-profile-container {
+  display: none;
+}
+
+/************** GAME POSTS **************/
+
+.post-games {
+  max-width: 60%;
+}
+
+div.panel-heading * {
+  display: inline-block;
+}
+
+div.update-post {
+  display: none;
+}
+
+/************** END GAME POSTS **************/
+
+/**/
