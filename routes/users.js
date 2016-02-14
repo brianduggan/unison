@@ -39,15 +39,41 @@ router.get('/', function(req,res){
   });
 })
 
-
+// GETS ONE USER -> FOR PROFILE
 router.get('/:id', function(req,res){
   var userId = req.params.id;
   console.log(userId)
   User.find({'_id': userId}, function(err, user){
     res.json({user: user})
+  }).populate('friends');
+})
+
+// UPDATES USER
+router.patch('/:id', function(req,res){
+  var userId = req.params.id;
+  var profile = req.body;
+  User.findByIdAndUpdate({'_id': userId}, profile, function(err, user){
+    res.json({user: userId})
   })
 })
 
+//ADDS FRIEND?
+router.put('/:id', function(req,res){
+  var userId = req.params.id;
+  var friendId = req.body.friend;
+  var yolo = User.find({'_id':userId}, function(err, user){
+    user[0].friends.push(friendId);
+    user[0].save(function(err, dbUser){
+      console.log("Error? "+err)
+      console.log(user[0]);
+      res.json({user:userId});
+    })
+  });
+  console.log("here it is...");
+})
+
+
+// GETS BGG API
 router.get('/taco', function(req, res) {
   var request = require('request');
   var parseString = require('xml2js').parseString;

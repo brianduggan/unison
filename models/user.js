@@ -8,7 +8,8 @@ var UserSchema = mongoose.Schema({
   token: {type: String},
   birthdate: {type: String, required: true},
   email: {type: String, required: true},
-  favoriteGames: {type: String}
+  favoriteGames: {type: String},
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 }, {timestamps: true});
 
 UserSchema.pre('save', function(next){

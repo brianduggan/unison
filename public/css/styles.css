@@ -15,6 +15,7 @@ body {
   font-family: FontAwesome;
 }
 
+
 /************** MAP **************/
 #map-container {
   position: fixed;
@@ -64,6 +65,11 @@ header button {
   border-radius: 10px;
 }
 
+header h5{
+  display: inline-block;
+  /*text-align: center;*/
+}
+
 .post-link {
   position: fixed;
   top: 35px;
@@ -81,6 +87,13 @@ header button {
   position: fixed;
   top: 35px;
   right: 170px;
+  border-bottom: 2px solid #01BAEF;
+}
+
+.home-link{
+  position: fixed;
+  top: 35px;
+  right: 340px;
   border-bottom: 2px solid #01BAEF;
 }
 
@@ -114,6 +127,10 @@ div.panel-heading * {
 
 div.update-post {
   display: none;
+}
+
+.map-location {
+  display: inline-block;
 }
 
 /************** END GAME POSTS **************/

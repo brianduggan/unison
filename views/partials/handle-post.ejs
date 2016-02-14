@@ -7,27 +7,28 @@
         <a href="#" class="get-info" data-name="{{game}}"><span class="font-awesome-icon">&#xf05a;</span></a>
       </div>
 
-      <div>
+      <div class="panel-body">
         {{#if user_id}}
           <h4>{{capitalize user_id.username}}</h4>
           {{#if locationName}}
             <h4>{{capitalize locationName}}</h4>
           {{/if}}
-          <h5 class="map-location">{{capitalize location}}</h5>
+          <h5 class="map-location">{{capitalize location}}</h5><a href="#" class='get-location'><i class="fa fa-map-signs"></i></a>
         {{/if}}
         {{#if players}}
           <h6>Players Needed: {{capitalize players}}</h6>
         {{/if}}
+      </div>
+      <div class="panel-footer">
         {{#if location}}
-          <a href="#" class='get-location'><i class="fa fa-map-signs"></i></a></br>
         {{/if }}
         {{#if user_id.email}}
-          <a href="mailto:{{user_id.email}}?Subject=A%20Unison%20gamer%20wants%20to%20play%20{{game}}"><span class="font-awesome-icon">&#xf0e0;</span></a>
+          <a href="mailto:{{user_id.email}}?Subject=A%20Unison%20Gamer%20wants%20to%20play%20{{game}}"><span class="font-awesome-icon">&#xf0e0;</span></a>
         {{/if}}
         {{deleteMe this}}
       </div>
 
-      <div class="update-post">
+      <div class="update-post panel-body">
         {{updateMe this}}
       </div>
 
@@ -40,14 +41,18 @@
   <div class="panel-heading">
     <h3>{{username}}'s Profile</h3>
   </div>
-  
-  <h5>Birthdate: {{birthdate}}</h5>
-  <h5>Favorite Games: {{favoriteGames}}</h5>
-  <h5>E-Mail: {{email}}</h5>
-
-  <form class="update-profile-form">
-    <input type="text" name="favoriteGames" value="{{favoriteGames}}" placeholder="Favorite Games">
-    <input type="text" name="email" value="{{email}}" placeholder="E-Mail">
-    <input type="submit" value="Update Profile">
-  </form>
+  <div class="panel-body">
+    <h5>Birthdate: {{birthdate}}</h5>
+    <h5>Favorite Games: {{favoriteGames}}</h5>
+    <h5>E-Mail: {{email}}</h5>
+    <h5>Friend List:</h5>
+    {{#each friends}}
+      {{username}}
+    {{/each}}
+    <form class="update-profile-form" data-user-id="{{_id}}">
+      <input type="text" name="favoriteGames" value="{{favoriteGames}}" placeholder="Favorite Games">
+      <input type="text" name="email" value="{{email}}" placeholder="E-Mail">
+      <input type="submit" value="Update Profile">
+    </form>
+  </div>
 </script>

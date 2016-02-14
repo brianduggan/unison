@@ -7,6 +7,8 @@
 
   <header>
     <i class="fa fa-puzzle-piece fa-3x"></i><h1>Unison</h1>
+    <h5 class="username-display"></h5>
+    <p class="home-link logged-in">Home</p>
     <p class="profile-link logged-in">Profile</p>
     <p class="post-link logged-in">Add Game Post</p>
     <p class="users-link logged-in">Users</p>
@@ -47,17 +49,19 @@
       <div class="panel-heading">
         <h3>Add a Game Post</h3>
       </div>
-      <form action="/postings/new" id="new-post">
-        <input type="text" name="game" placeholder="Game" required>
-        <input type="text" name="locationName" placeholder="Place Name" required>
-        <input type="text" name="location" placeholder="Location" required>
-        <input type="text" name="players" placeholder="Players Needed" required>
-        <input type="submit" value="Add Post">
-      </form>
+      <div class="panel-body">
+        <form action="/postings/new" id="new-post">
+          <input type="text" name="game" placeholder="Game" required>
+          <input type="text" name="locationName" placeholder="Place Name" required>
+          <input type="text" name="location" placeholder="Location" required>
+          <input type="text" name="players" placeholder="Players Needed" required>
+          <input type="submit" value="Add Post">
+        </form>
+      </div>
     </div>
 
     <!-- GOOGLE MAP -->
-    <div id="map-container" class="logged-in"><div id="map" class="logged-in"></div></div>
+    <div id="map-container" class="logged-in nav-toggle"><div id="map" class="logged-in"></div></div>
 
     <!-- PROFILE -->
     <div class="update-profile-container panel panel-default"></div>
@@ -69,7 +73,7 @@
     <div class="game-info"></div>
 
     <!-- USERS LIST -->
-    <div id="all-users" class="logged-in log-toggle"></div>
+    <div id="all-users" class="logged-in log-toggle panel panel-default"></div>
 
   </div>
 </body>
