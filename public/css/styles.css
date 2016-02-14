@@ -13,6 +13,7 @@ body {
 
 .font-awesome-icon {
   font-family: FontAwesome;
+  font-size: 1.2em;
 }
 
 
@@ -134,5 +135,42 @@ div.update-post {
 }
 
 /************** END GAME POSTS **************/
+
+/************** GAME INFO MODAL **************/
+
+.game-info {
+  background-color: rgba(0,0,0,0.4);
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.modal-container {
+  width: 70%;
+  margin: 3% auto;
+  height: 700px;
+  overflow: scroll;
+}
+
+.close-modal {
+  text-align: right;
+}
+
+.close-modal:hover {
+  cursor: pointer;
+}
+
+.game-details {
+  display: none;
+}
+
+
+/************** END GAME INFO MODAL **************/
+
+
 
 /**/

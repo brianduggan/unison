@@ -50,6 +50,7 @@
       {{username}}
     {{/each}}
     <form class="update-profile-form" data-user-id="{{_id}}">
+      <input type="date" name="birthdate" value="{{birthdate}}" placeholder="birthdate">
       <input type="text" name="favoriteGames" value="{{favoriteGames}}" placeholder="Favorite Games">
       <input type="text" name="email" value="{{email}}" placeholder="E-Mail">
       <input type="submit" value="Update Profile">

@@ -38,7 +38,7 @@ function logOutHandler(){
     $.removeCookie('token');
     $.removeCookie('user_id');
     location.reload();
-  })
+  });
 }
 
 function onloadGetter(){
@@ -55,32 +55,61 @@ function onloadGetter(){
 
 
 function displayPostInfoResults(response){
-  var $infoDiv = $('.game-info');
+  var $main = $('.game-info');
+  var $infoDiv = $('<div class="modal-container panel panel-default">');
+  var $modalHeader = $('<div class="panel-heading close-modal">').text("X");
+  var $infoBody = $('<div class="panel-body">');
+  $main.append($infoDiv);
   $infoDiv.empty();
+  $infoDiv.append($modalHeader);
+  $infoDiv.append($infoBody);
   response.forEach(function(result){
     var mainDestination = result.items.item[0];
-    var $el = $('<li>');
+    var $el = $('<div>');
     var gameId = result.items.item[0].$.id;
+    var minPlay = mainDestination.minplayers[0].$.value;
+    var maxPlay = mainDestination.maxplayers[0].$.value;
+    var description = mainDestination.description[0];
+    var age = mainDestination.minage[0].$.value;
+    console.log(mainDestination);
     var gameName = mainDestination.name[0].$.value;
-    console.log(gameName);
-    $el.append( $('<h2>').text(gameName) );
-    $el.append( $('<a href="https://boardgamegeek.com/boardgame/'+gameId+'/">').text( gameName + " on Board Game Geek"));
-    $infoDiv.append($el);
+    $el.append( $('<h3>').text(gameName) );
+    $el.append( $('<span class="font-awesome-icon expand">').html('&#xf18e;'));
+    var $content = $('<div class="game-details">');
+    $el.append($content);
+    $content.append( $('<p>').html("Description: " + description) )
+    $content.append( $('<p>').text("Players: " + minPlay + "-" + maxPlay) );
+    $content.append( $('<p>').text("Suggested Age: " + age + "+" ) );
+    $content.append( $('<a href="https://boardgamegeek.com/boardgame/'+gameId+'/">').text( gameName + " on Board Game Geek"));
+    $infoBody.append($el);
   })
 };
+
+function closeModal(){
+  $('.game-info').on('click', '.close-modal', function(e){
+    $('.game-info').hide();
+  })
+};
+
+function expandInfo(){
+  $('.game-info').on('click', '.expand', function(){
+    var info = $(this).next();
+    info.slideToggle();
+  })
+}
 
 function postInfoHandler(){
   $('.post-games').on('click', '.get-info', function(e){
     e.preventDefault();
     var $self = $(this);
-    var $infoDiv = $('.game-info');
-    $infoDiv.append( "LOADING!!!" );
+    $('.game-info').show();
     var nameGame = $self.data('name');
     $.ajax({
       method: 'get',
-      url: '/users/taco',
+      url: '/users/taco/fluffybunny',
       data: {name: nameGame},
       success: function(response){
+        console.log(response);
         displayPostInfoResults(response);
       }
     })
@@ -107,6 +136,9 @@ function displayAllUsers(users){
   allUsers.forEach(function(user){
     var cookieToken = $.cookie('user_id');
     if (cookieToken !== user._id ){
+      // $.get('/users/'+cookieId, function(response){
+      //   currentUser = response;
+      // })
       console.log(user._id);
       var $user = $('<div>');
       $user.append( $('<h3>').text(user.username) );
@@ -236,7 +268,9 @@ function updateProfile(){
     var emailVal = $email.val();
     var $favGames = $(this).find('input[name="favoriteGames"]');
     var favGamesVal = $favGames.val();
-    var profile = {email: emailVal, favoriteGames: favGamesVal};
+    var $birth = $(this).find('input[name="birthdate"]');
+    var birthVal = $birth.val();
+    var profile = {email: emailVal, favoriteGames: favGamesVal, birthdate: birthVal};
     var userId = $(this).data('user-id');
     console.log(profile);
     console.log(userId);
@@ -295,7 +329,6 @@ function addFriendHandler(){
 }
 
 $(function(){
-
   logInHandler();
   logOutHandler();
   onloadGetter();
@@ -314,6 +347,8 @@ $(function(){
   homeLinkHandler();
   usernameDisplay();
   addFriendHandler();
+  closeModal();
+  expandInfo();
 });
 
 //
