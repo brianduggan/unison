@@ -56,11 +56,11 @@ function onloadGetter(){
 
 function displayPostInfoResults(response){
   var $main = $('.game-info');
+  $main.empty();
   var $infoDiv = $('<div class="modal-container panel panel-default">');
   var $modalHeader = $('<div class="panel-heading close-modal">').text("X");
   var $infoBody = $('<div class="panel-body">');
   $main.append($infoDiv);
-  $infoDiv.empty();
   $infoDiv.append($modalHeader);
   $infoDiv.append($infoBody);
   response.forEach(function(result){
@@ -137,7 +137,7 @@ function displayAllUsers(users){
     var cookieToken = $.cookie('user_id');
     if (cookieToken !== user._id ){
       // $.get('/users/'+cookieId, function(response){
-      //   currentUser = response;
+      //   var currentUser = response;
       // })
       console.log(user._id);
       var $user = $('<div>');
