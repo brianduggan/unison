@@ -8,16 +8,22 @@
       </div>
 
       <div class="panel-body">
+        <div class="row">
         {{#if user_id}}
-          <h4>{{capitalize user_id.username}}</h4>
+        <div class="col-md-6">
+          <h4>Hosted by: {{capitalize user_id.username}}</h4>
           {{#if locationName}}
-            <h4>{{capitalize locationName}}</h4>
+            <h4>@ {{capitalize locationName}}</h4>
           {{/if}}
+          </div>
+          <div class="col-md-6">
           <h5 class="map-location">{{capitalize location}}</h5><a href="#" class='get-location'><i class="fa fa-map-signs"></i></a>
         {{/if}}
         {{#if players}}
-          <h6>Players Needed: {{capitalize players}}</h6>
+          <h5>Players Needed: {{capitalize players}}</h5>
         {{/if}}
+          </div>
+        </div>
       </div>
       <div class="panel-footer">
         {{#if location}}

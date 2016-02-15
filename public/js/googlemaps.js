@@ -1,5 +1,5 @@
 function getLocation(location){
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyBP1jvg8jCcMuZidBGFeQVET037VcVOF78';
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyAtQeWl-x_C9eL4oyWNKiiuCyOrtG2E-6I';
   console.log(location);
   var coordinates = {};
   $.ajax({
@@ -22,8 +22,20 @@ function masterMap(locations){
   myMap.init = function(){
     this.map;
     this.zoom = 15;
+
+    // if (navigator.geolocation){
+    //   navigator.geolocation.getCurrentPosition(function(pos){
+    //     var currentLat = pos.coords.latitude;
+    //     var currentLng = pos.coords.longitude;
+    //     console.log(currentLat, currentLng)
+    //     this.currentLatLng = new google.maps.LatLng(currentLat, currentLng);
+    //     console.log(this.currentLatLng)
+    //   })
+    // } else {
+      this.currentLatLng = new google.maps.LatLng(40.6784471, -73.9653714);
+    // }
+
     this.mapEl = document.querySelector('#map');
-    this.currentLatLng = new google.maps.LatLng(40.6784471, -73.9653714);
     this.map = new google.maps.Map( this.mapEl, {
       center: this.currentLatLng,
       zoom: this.zoom,
@@ -31,7 +43,7 @@ function masterMap(locations){
     });
 
   locations.postings.forEach(function(loc){
-    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +loc.location+ '&key=AIzaSyBP1jvg8jCcMuZidBGFeQVET037VcVOF78';
+    var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +loc.location+ '&key=AIzaSyAtQeWl-x_C9eL4oyWNKiiuCyOrtG2E-6I';
     var coordinates = {};
     $.ajax({
       method: 'get',
@@ -46,13 +58,10 @@ function masterMap(locations){
             map: this.map,
           });
           marker.info = new google.maps.InfoWindow({
-            content: '<h2>'+loc.game+'</h2><h4>'+loc.user_id.username+'</h4>'
+            content: '<h2>'+loc.game+'</h2><h4>Host: '+loc.user_id.username+'</h4><p>Players Needed: '+loc.players+'</p>'
           });
-          google.maps.event.addListener(marker, 'mouseover', function(){
+          google.maps.event.addListener(marker, 'click', function(){
             marker.info.open(myMap.map, marker);
-          })
-          google.maps.event.addListener(marker, 'mouseout', function(){
-            marker.info.close(myMap.map, marker);
           })
           marker.setMap(myMap.map);
         }
@@ -69,7 +78,7 @@ function masterMap(locations){
 
 
 function centerMap(location){
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyBP1jvg8jCcMuZidBGFeQVET037VcVOF78';
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' +location+ '&key=AIzaSyAtQeWl-x_C9eL4oyWNKiiuCyOrtG2E-6I';
   $.ajax({
     method: 'get',
     url: url,

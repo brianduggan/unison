@@ -70,7 +70,12 @@ function displayPostInfoResults(response){
     var minPlay = mainDestination.minplayers[0].$.value;
     var maxPlay = mainDestination.maxplayers[0].$.value;
     var description = mainDestination.description[0];
-    var age = mainDestination.minage[0].$.value;
+    var age;
+    if (mainDestination.minage){
+      age = mainDestination.minage[0].$.value;
+    } else {
+      age = 0;
+    }
     console.log(mainDestination);
     var gameName = mainDestination.name[0].$.value;
     $el.append( $('<h3>').text(gameName) );
