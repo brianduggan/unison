@@ -62,10 +62,18 @@ router.put('/:id', function(req,res){
   var userId = req.params.id;
   var friendId = req.body.friend;
   var yolo = User.find({'_id':userId}, function(err, user){
-    user[0].friends.push(friendId);
-    user[0].save(function(err, dbUser){
-      res.json({user:userId});
-    });
+    if (req.body.option === "add"){
+      user[0].friends.push(friendId);
+      user[0].save(function(err, dbUser){
+        res.json({user:userId});
+      });
+    } else {
+      var index = user[0].friends.indexOf(friendId);
+      user[0].friends.splice(index, 1);
+      user[0].save(function(err, dbUser){
+        res.json({user:userId});
+      })
+    }
   });
   console.log("here it is...");
 });

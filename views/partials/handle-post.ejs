@@ -45,10 +45,6 @@
     <h5>Birthdate: {{birthdate}}</h5>
     <h5>Favorite Games: {{favoriteGames}}</h5>
     <h5>E-Mail: {{email}}</h5>
-    <h5>Friend List:</h5>
-    {{#each friends}}
-      {{username}}
-    {{/each}}
     <form class="update-profile-form" data-user-id="{{_id}}">
       <input type="date" name="birthdate" value="{{birthdate}}" placeholder="birthdate">
       <input type="text" name="favoriteGames" value="{{favoriteGames}}" placeholder="Favorite Games">

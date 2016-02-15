@@ -134,6 +134,10 @@ div.update-post {
   display: inline-block;
 }
 
+a.update-posting{
+  padding: 2%;
+}
+
 /************** END GAME POSTS **************/
 
 /************** GAME INFO MODAL **************/

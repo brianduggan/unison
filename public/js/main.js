@@ -133,18 +133,32 @@ function displayAllUsers(users){
   $usersDiv.append( $('<div class="panel-heading">').append($('<h2>').text("Unison Users")) );
   var $usersBody = $('<div class="panel-body">');
   $usersBody.appendTo($usersDiv);
-  allUsers.forEach(function(user){
-    var cookieToken = $.cookie('user_id');
-    if (cookieToken !== user._id ){
-      // $.get('/users/'+cookieId, function(response){
-      //   var currentUser = response;
-      // })
-      console.log(user._id);
-      var $user = $('<div>');
-      $user.append( $('<h3>').text(user.username) );
-      $user.append( $('<a href="#" data-user-id="'+user._id+'" class="show-profile">').text('Profile') )
-      $user.append( $('<a href="#" data-user-id="'+user._id+'" class="add-friend">').text('Add to Friends List') );
-      $usersBody.append( $user )
+  var $friendsDiv = $('<div class="friends">').append( $('<h2>').text("Friends") );
+  var $othersDiv = $('<div class="others">').append( $('<h3>').text("Other Users")  );
+  $usersBody.append($friendsDiv);
+  $usersBody.append($othersDiv);
+  var cookieToken = $.cookie('user_id');
+  $.get('/users/'+cookieToken, function(response){
+    if (response.user){
+      var friends = response.user[0].friends;
+      var friendsArray = [];
+      friends.forEach(function(friend){
+        friendsArray.push(friend._id);
+      });
+      allUsers.forEach(function(user){
+          if (cookieToken !== user._id ){
+            var $user = $('<div>');
+            $user.append( $('<h4>').text(user.username) );
+            if (friendsArray.includes(user._id)){
+              $friendsDiv.append($user);
+              console.log(user);
+              $user.append( $('<a href="#" data-user-id="'+user._id+'" class="remove-friend">').text('Remove from Friends List') );
+            } else {
+              $user.append( $('<a href="#" data-user-id="'+user._id+'" class="add-friend">').text('Add to Friends List') );
+              $othersDiv.append($user);
+            }
+          }
+      });
     }
   });
 }
@@ -169,7 +183,6 @@ function getOtherUserProfile(){
       url: '/users/' + userId,
       success: function(response){
         var userPro = response.user[0];
-
       }
     })
   })
@@ -298,7 +311,6 @@ function usernameDisplay(){
   if ($.cookie('user_id')){
     var id = $.cookie('user_id');
     var url = '/users/'+id;
-    console.log(url);
     $.ajax({
       method: 'get',
       url: url,
@@ -316,13 +328,32 @@ function addFriendHandler(){
     var friendId = $(this).data('user-id');
     var userId = $.cookie('user_id');
     console.log(friendId, userId);
-    var friendData = {friend: friendId};
+    var friendData = {friend: friendId, option: 'add'};
     $.ajax({
       method: 'put',
       url: '/users/'+ userId,
       data: friendData,
       success: function(response){
-        console.log(response)
+        getAllUsers();
+      }
+    })
+  })
+}
+
+function removeFriendHandler(){
+  $('#all-users').on('click', '.remove-friend', function(e){
+    e.preventDefault();
+    var friendId = $(this).data('user-id');
+    var userId = $.cookie('user_id');
+    console.log("removing!");
+    console.log(friendId, userId);
+    var friendData = {friend: friendId, option: 'remove'};
+    $.ajax({
+      method: 'put',
+      url: '/users/'+ userId,
+      data: friendData,
+      success: function(response){
+        getAllUsers();
       }
     })
   })
@@ -347,6 +378,7 @@ $(function(){
   homeLinkHandler();
   usernameDisplay();
   addFriendHandler();
+  removeFriendHandler();
   closeModal();
   expandInfo();
 });
