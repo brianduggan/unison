@@ -5,7 +5,7 @@ function getLocation(location){
   $.ajax({
     method: 'get',
     url: url,
-    always: function(response){
+    complete: function(response){
       console.log(response);
       var resultGeo = response.results[0].geometry;
       var lat = resultGeo.location.lat;
@@ -47,7 +47,7 @@ function masterMap(locations){
     $.ajax({
       method: 'get',
       url: url,
-      success: function(response){
+      complete: function(response){
         console.log(response);
         if (response.results[0]){
           var resultGeo = response.results[0].geometry;
