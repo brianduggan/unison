@@ -5,7 +5,7 @@ function getLocation(location){
   $.ajax({
     method: 'get',
     url: url,
-    success: function(response){
+    always: function(response){
       console.log(response);
       var resultGeo = response.results[0].geometry;
       var lat = resultGeo.location.lat;
