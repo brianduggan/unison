@@ -19,7 +19,7 @@ router.post('/authenticate', function(req, res){
   User.findOne({username: username}, function(err, dbUser){
     console.log(dbUser);
     if (err){
-      res.json({"Sorry nothing"});
+      res.json({message: "Sorry nothing"});
     }
     dbUser.authenticate(passwordTry, function(err, isMatch){
       if(isMatch){
