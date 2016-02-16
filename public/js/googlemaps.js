@@ -7,8 +7,8 @@ function getLocation(location){
     url: url,
     success: function(response){
       var resultGeo = response.results[0].geometry;
-      lat = resultGeo.location.lat;
-      lng = resultGeo.location.lng;
+      var lat = resultGeo.location.lat;
+      var lng = resultGeo.location.lng;
       coordinates = {latitude: lat, longitude: lng};
       return coordinates;
     }
@@ -19,7 +19,6 @@ var myMap = {};
 
 function masterMap(locations){
   myMap.init = function(){
-    this.map;
     this.zoom = 15;
 
     // if (navigator.geolocation){
@@ -50,8 +49,8 @@ function masterMap(locations){
       success: function(response){
         if (response.results[0]){
           var resultGeo = response.results[0].geometry;
-          lat = resultGeo.location.lat;
-          lng = resultGeo.location.lng;
+          var lat = resultGeo.location.lat;
+          var lng = resultGeo.location.lng;
           var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lng),
             map: this.map,
