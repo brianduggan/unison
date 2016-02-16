@@ -31,7 +31,7 @@ function updateButton(){
   $('.post-games').on('click', '.update-posting', function(e){
     e.preventDefault();
     console.log("Hello");
-    var $thisPlace = $(this).parent().next();
+    var $thisPlace = $(this).parent().parent().parent().find('.update-post');
     console.log($thisPlace);
     $thisPlace.slideToggle();
   })
