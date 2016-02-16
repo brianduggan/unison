@@ -23,14 +23,16 @@ function logInHandler(){
     var $passwordField = $(this).find('input[name="password"]');
     var passwordValue = $passwordField.val();
     logIn(usernameValue, passwordValue, function(){
-      console.log('The token is: '+ $.cookie('token') + '\nThe user id is: '+ $.cookie('user_id'));
-      handlebarsPost();
-      getAllUsers();
-      masterMapDisplayer();
-      usernameDisplay();
-      $('.logged-in').show();
-      $('.logged-out').hide();
-      $('.log-toggle').hide();
+      if($.cookie('token')){
+        console.log('The token is: '+ $.cookie('token') + '\nThe user id is: '+ $.cookie('user_id'));
+        handlebarsPost();
+        getAllUsers();
+        masterMapDisplayer();
+        usernameDisplay();
+        $('.logged-in').show();
+        $('.logged-out').hide();
+        $('.log-toggle').hide();
+      }
     });
   });
 }
