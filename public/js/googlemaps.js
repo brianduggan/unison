@@ -6,6 +6,7 @@ function getLocation(location){
     method: 'get',
     url: url,
     success: function(response){
+      console.log(response);
       var resultGeo = response.results[0].geometry;
       var lat = resultGeo.location.lat;
       var lng = resultGeo.location.lng;
@@ -47,6 +48,7 @@ function masterMap(locations){
       method: 'get',
       url: url,
       success: function(response){
+        console.log(response);
         if (response.results[0]){
           var resultGeo = response.results[0].geometry;
           var lat = resultGeo.location.lat;
