@@ -11,7 +11,6 @@ function getLocation(location){
       lng = resultGeo.location.lng;
       coordinates = {latitude: lat, longitude: lng};
       return coordinates;
-      makeMap(coordinates);
     }
   });
 }
@@ -62,12 +61,12 @@ function masterMap(locations){
           });
           google.maps.event.addListener(marker, 'click', function(){
             marker.info.open(myMap.map, marker);
-          })
+          });
           marker.setMap(myMap.map);
         }
       }
     });
-  })
+  });
 
 };
   myMap.init();
