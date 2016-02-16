@@ -6,8 +6,10 @@
   #150811 - Black
 */
 
+/*233 136 30*/
+
 body {
-  background-color: #01BAEF;
+  background-color: rgba(233,136,30,0.7);
   font-family: 'PT Sans', sans-serif;
 }
 
@@ -38,9 +40,9 @@ header {
   position: fixed;
   height: 80px;
   top: 0;
-  background-color: #26081C;
+  background-color: saddlebrown;
   width: 100%;
-  color: #0CBABA;
+  color: bisque;
   z-index: 10;
 }
 
@@ -68,34 +70,29 @@ header button {
 
 header h5{
   display: inline-block;
-  /*text-align: center;*/
 }
 
 .post-link {
   position: fixed;
   top: 35px;
   right: 230px;
-  border-bottom: 2px solid #01BAEF;
 }
 
 .users-link {
   position: fixed;
   top: 35px;
   right: 120px;
-  border-bottom: 2px solid #01BAEF;
 }
 .profile-link {
   position: fixed;
   top: 35px;
   right: 170px;
-  border-bottom: 2px solid #01BAEF;
 }
 
 .home-link{
   position: fixed;
   top: 35px;
   right: 340px;
-  border-bottom: 2px solid #01BAEF;
 }
 
 /************** END MAP **************/
@@ -122,7 +119,19 @@ header h5{
   max-width: 50%;
 }
 
+.go-right {
+  text-align: right;
+}
 
+.go-right span{
+  padding: 1%;
+}
+
+.panel {
+  -webkit-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 3px 2px 5px 0px rgba(0,0,0,0.75);
+}
 
 div.panel-heading * {
   display: inline-block;
@@ -161,6 +170,14 @@ a.update-posting{
   height: 700px;
   overflow: auto;
   z-index: 300;
+}
+
+.modal-container h3{
+  display: inline-block;
+}
+
+.modal-container span {
+  margin-left: 10px;
 }
 
 .close-modal {

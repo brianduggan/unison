@@ -1,7 +1,7 @@
 Handlebars.registerHelper('deleteMe', function(element){
   var cookie = $.cookie('user_id');
   if (cookie === element.user_id._id){
-    var el = new Handlebars.SafeString('<a href="#" class="update-posting"><span class="font-awesome-icon">&#xf062;</span>Update</a><a href="#" class="delete-posting" data-post-id="'+element._id+'"><i class="fa fa-minus-circle"></i>Delete</a>')
+    var el = new Handlebars.SafeString('<div class="go-right"><a href="#" class="update-posting"><span class="font-awesome-icon">&#xf062;</span>Update</a><a href="#" class="delete-posting" data-post-id="'+element._id+'"><span class="font-awesome-icon">&#xf056;</span>Delete</a></div>')
     return el
   }
 })
@@ -19,4 +19,14 @@ Handlebars.registerHelper('capitalize', function(words){
   var firstLetterCap = words.split(" ")[0].split("")[0].toUpperCase();
   wordArray[0] = firstLetterCap;
   return wordArray.join('');
+})
+
+Handlebars.registerHelper('emailme', function(post){
+  var el;
+  var cookie = $.cookie('user_id');
+  if (cookie !== post.user_id._id){
+    el = new Handlebars.SafeString('<a href="mailto:'+post.user_id.email+'?Subject=A%20Unison%20Gamer%20wants%20to%20play%20{{game}}"><span class="font-awesome-icon">&#xf0e0;</span></a>')
+    return el
+  }
+  return el
 })

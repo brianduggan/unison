@@ -28,9 +28,7 @@
       <div class="panel-footer">
         {{#if location}}
         {{/if }}
-        {{#if user_id.email}}
-          <a href="mailto:{{user_id.email}}?Subject=A%20Unison%20Gamer%20wants%20to%20play%20{{game}}"><span class="font-awesome-icon">&#xf0e0;</span></a>
-        {{/if}}
+        {{ emailme this}}
         {{deleteMe this}}
       </div>
 

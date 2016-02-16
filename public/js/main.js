@@ -99,6 +99,8 @@ function closeModal(){
 function expandInfo(){
   $('.game-info').on('click', '.expand', function(){
     var info = $(this).next();
+    $(this).toggle();
+    console.log($(this));
     info.slideToggle();
   })
 }
@@ -193,13 +195,6 @@ function getOtherUserProfile(){
   })
 }
 
-
-
-
-
-
-
-
 function masterMapDisplayer(){
   $.ajax({
     method: 'get',
@@ -214,7 +209,6 @@ function handlebarsPost(){
   $('.post-games').empty();
   $.getJSON('/postings', function(data){
       var source = $('#posts').html();
-      console.log(data);
       var template = Handlebars.compile(source);
       var posts = data;
       var compiledHTML = template(posts);

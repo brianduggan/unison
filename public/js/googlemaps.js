@@ -14,27 +14,27 @@ function masterMap(locations){
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-  locations.postings.forEach(function(loc){
-    geocoder.geocode({'address': loc.location}, function(response, status){
-      if (response){
-        var marker = new google.maps.Marker({
-          position: response[0].geometry.location,
-          map: this.map
-        });
-        marker.info = new google.maps.InfoWindow({
-          content: '<h2>'+loc.game+'</h2><h4>Host: '+loc.user_id.username+'</h4><p>Players Needed: '+loc.players+'</p>'
-        });
-        google.maps.event.addListener(marker, 'click', function(){
-          marker.info.open(myMap.map, marker);
-        });
-        marker.setMap(myMap.map);
-      } else {
-        console.log(status);
-      }
+    locations.postings.forEach(function(loc){
+      geocoder.geocode({'address': loc.location}, function(response, status){
+        if (response){
+          var marker = new google.maps.Marker({
+            position: response[0].geometry.location,
+            map: this.map
+          });
+          marker.info = new google.maps.InfoWindow({
+            content: '<h2>'+loc.game+'</h2><h4>Host: '+loc.user_id.username+'</h4><p>Players Needed: '+loc.players+'</p>'
+          });
+          google.maps.event.addListener(marker, 'click', function(){
+            marker.info.open(myMap.map, marker);
+          });
+          marker.setMap(myMap.map);
+        } else {
+          console.log(status);
+        }
+      });
     });
-  });
 
-};
+  };
   myMap.init();
   console.log(myMap);
 }
