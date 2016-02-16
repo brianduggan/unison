@@ -18,20 +18,21 @@ router.post('/authenticate', function(req, res){
   var passwordTry = req.body.password;
   User.findOne({username: username}, function(err, dbUser){
     console.log(dbUser);
-    if (err){
-      res.json({message: "Sorry nothing"});
-    }
-    dbUser.authenticate(passwordTry, function(err, isMatch){
-      if(isMatch){
-        dbUser.setToken(function(){
-          res.json({
-            description: 'password correct',
-            user_id: dbUser._id,
-            token: dbUser.token
+    if (dbUser){
+      dbUser.authenticate(passwordTry, function(err, isMatch){
+        if(isMatch){
+          dbUser.setToken(function(){
+            res.json({
+              description: 'password correct',
+              user_id: dbUser._id,
+              token: dbUser.token
+            });
           });
-        });
-      }
-    });
+        }
+      });
+    } else {
+      res.json({description: 'password is correct', status: 302})
+    }
   });
 });
 
