@@ -25,7 +25,7 @@ Handlebars.registerHelper('emailme', function(post){
   var el;
   var cookie = $.cookie('user_id');
   if (cookie !== post.user_id._id){
-    el = new Handlebars.SafeString('<a href="mailto:'+post.user_id.email+'?Subject=A%20Unison%20Gamer%20wants%20to%20play%20{{game}}"><span class="font-awesome-icon">&#xf0e0;</span></a>')
+    el = new Handlebars.SafeString('<a href="mailto:'+post.user_id.email+'?Subject=A%20Unison%20Gamer%20wants%20to%20play%20'+post.user_id.game+'"><span class="font-awesome-icon">&#xf0e0;</span></a>')
     return el
   }
   return el
