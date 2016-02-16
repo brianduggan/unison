@@ -152,7 +152,7 @@ a.update-posting{
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 300;
 }
 
 .modal-container {
@@ -160,6 +160,7 @@ a.update-posting{
   margin: 3% auto;
   height: 700px;
   overflow: auto;
+  z-index: 300;
 }
 
 .close-modal {
