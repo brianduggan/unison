@@ -235,6 +235,10 @@ a.update-posting{
   }
 }
 
+.post-games {
+  width: 100%;
+}
+
 .handle-post {
   width: 80%;
 }
