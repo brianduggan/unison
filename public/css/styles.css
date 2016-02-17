@@ -244,4 +244,13 @@ a.update-posting{
   }
 }
 
+@media screen and (max-width: 625px) {
+
+  #map {
+    max-width: 80%;
+  }
+
+
+}
+
 /**/
