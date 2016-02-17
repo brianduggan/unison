@@ -229,7 +229,7 @@ a.update-posting{
   #map-container {
     display: block;
     position: static;
-    width: 72%;
+    width: 85%;
     margin: 2%;
     margin-top: 120px;
   }
@@ -247,7 +247,7 @@ a.update-posting{
 @media screen and (max-width: 625px) {
 
   #map {
-    max-width: 80%;
+    max-width: 100%;
   }
 
 
