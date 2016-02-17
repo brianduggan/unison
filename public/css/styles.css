@@ -233,14 +233,15 @@ a.update-posting{
     margin: 2%;
     margin-top: 120px;
   }
-}
 
-.post-games {
-  width: 100%;
-}
+  .post-games {
+    max-width: 100%;
+    width: 100%
+  }
 
-.handle-post {
-  width: 80%;
+  .handle-post {
+    width: 80%;
+  }
 }
 
 /**/
