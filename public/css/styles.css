@@ -225,4 +225,13 @@ a.update-posting{
   color: red;
 }
 
+@media screen and (max-width: 1000px) {
+  #map-container {
+    display: block;
+    position: static;
+    width: 80%;
+    margin: 2%;
+  }
+}
+
 /**/
