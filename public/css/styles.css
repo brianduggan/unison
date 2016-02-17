@@ -231,11 +231,11 @@ a.update-posting{
     position: static;
     width: 72%;
     margin: 2%;
-    margin-top: 450px;
+    margin-top: 120px;
   }
 }
 
-.post-games {
+.handle-post {
   width: 80%;
 }
 
