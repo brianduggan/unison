@@ -84,6 +84,7 @@ function displayPostInfoResults(response){
     console.log(mainDestination);
     var gameName = mainDestination.name[0].$.value;
     $el.append( $('<h3>').text(gameName) );
+    $el.append( $('<span class="font-awesome-icon minimize">').html('&#xf01b;'));
     $el.append( $('<span class="font-awesome-icon expand">').html('&#xf18e;'));
     var $content = $('<div class="game-details">');
     $el.append($content);
@@ -101,11 +102,20 @@ function closeModal(){
   })
 };
 
+function minimizeInfo(){
+  $('.game-info').on('click', '.minimize', function(){
+    var info = $(this).next().next();
+    $(this).next().show();
+    $(this).hide();
+    info.slideToggle();
+  })
+}
+
 function expandInfo(){
   $('.game-info').on('click', '.expand', function(){
     var info = $(this).next();
-    $(this).toggle();
-    console.log($(this));
+    $(this).hide();
+    $(this).prev().show();
     info.slideToggle();
   })
 }
@@ -385,6 +395,7 @@ $(function(){
   removeFriendHandler();
   closeModal();
   expandInfo();
+  minimizeInfo();
 });
 
 //

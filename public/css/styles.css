@@ -18,6 +18,13 @@ body {
   font-size: 1.2em;
 }
 
+a:visited {
+  text-decoration: none;
+}
+
+a:focus {
+  text-decoration: none;
+}
 
 /************** MAP **************/
 #map-container {
@@ -95,6 +102,11 @@ header h5{
   right: 340px;
 }
 
+.header-link:hover {
+  cursor: pointer;
+  text-shadow: 3px 1px 3px rgba(150, 150, 150, 1);
+}
+
 /************** END MAP **************/
 .container {
   margin: 100px auto;
@@ -121,10 +133,16 @@ header h5{
 
 .go-right {
   text-align: right;
+  text-decoration: none;
 }
 
 .go-right span{
   padding: 1%;
+}
+
+.go-right a:hover {
+  text-decoration: none;
+  color:red;
 }
 
 .panel {
@@ -192,8 +210,16 @@ a.update-posting{
   display: none;
 }
 
+.minimize {
+  display: none;
+}
 
 /************** END GAME INFO MODAL **************/
+
+.update-post-form input {
+  display: block;
+  margin: 1%;
+}
 
 
 /**/

@@ -23,6 +23,8 @@ function newPostHandler(){
     })
     $gameField.val("");
     $locationField.val("");
+    $playersField.val("");
+    $locationNameField.val("");
   });
 }
 
