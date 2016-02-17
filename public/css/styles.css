@@ -221,5 +221,8 @@ a.update-posting{
   margin: 1%;
 }
 
+.error-message {
+  color: red;
+}
 
 /**/

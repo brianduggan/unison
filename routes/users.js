@@ -31,7 +31,7 @@ router.post('/authenticate', function(req, res){
         }
       });
     } else {
-      res.json({description: 'password is correct', status: 302})
+      res.json({description: 'Sorry! Username or Password is incorrect!!', status: 302})
     }
   });
 });

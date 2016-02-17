@@ -4,13 +4,15 @@ function logIn(usernameTry, passwordTry, callback){
     method: 'post',
     url: '/users/authenticate',
     data: {username: usernameTry, password: passwordTry},
-    failure: function(err){
-      console.log(err);
-    },
     success: function(data){
-      $.cookie('token', data.token);
-      $.cookie('user_id', data.user_id);
-      callback();
+      if (data.status === 302){
+        $('#log-in').append( $('<h5 class="error-message">').text(data.description) );
+        console.log(data.description)
+      } else {
+        $.cookie('token', data.token);
+        $.cookie('user_id', data.user_id);
+        callback();
+      }
     }
   });
 }
