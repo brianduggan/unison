@@ -1,16 +1,10 @@
-/* COLORS
-  #01BAEF - Light Blue
-  #0CBABA - Seafoamish
-  #380036 - Purple
-  #26081C - Somehow even darker purple
-  #150811 - Black
-*/
-
-/*233 136 30*/
-
 body {
   background-color: rgba(233,136,30,0.7);
   font-family: 'PT Sans', sans-serif;
+}
+
+.hamburger {
+  display: none;
 }
 
 .font-awesome-icon {
@@ -229,7 +223,7 @@ a.update-posting{
   #map-container {
     display: block;
     position: static;
-    width: 85%;
+    width: 80%;
     margin: 2%;
     margin-top: 120px;
   }
@@ -247,10 +241,40 @@ a.update-posting{
 @media screen and (max-width: 625px) {
 
   #map {
-    max-width: 100%;
+    max-width: 95%;
   }
 
+  .post-link, .users-link, .profile-link, .home-link {
+    position: static;
+    display: block;
+    background-color: saddlebrown;
+    margin: 0 auto;
+  }
+
+  .puzzle-logo {
+    display: none;
+  }
+
+  .menu-stuff {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-block;
+    font-size: 2em;
+  }
 
 }
 
+input {
+	display: block;
+  margin: 2px;
+  width: 40%;
+  border-radius: 5px;
+}
+
+input.form-control {
+  width: 40%;
+  padding: 2%;
+}
 /**/

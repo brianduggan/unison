@@ -101,6 +101,7 @@ function displayPostInfoResults(response){
 function closeModal(){
   $('.game-info').on('click', '.close-modal', function(e){
     $('.game-info').hide();
+    $('.game-info').empty();
   })
 };
 
@@ -375,6 +376,12 @@ function removeFriendHandler(){
   })
 }
 
+function headerHamburger(){
+  $('.hamburger').on('click', function(){
+    $('.menu-stuff').slideToggle();
+  })
+}
+
 $(function(){
   logInHandler();
   logOutHandler();
@@ -398,6 +405,7 @@ $(function(){
   closeModal();
   expandInfo();
   minimizeInfo();
+  headerHamburger();
 });
 
 //
