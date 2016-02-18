@@ -93,9 +93,6 @@ router.get('/taco/fluffybunny', function(req, res){
   var xml = 'https://www.boardgamegeek.com/xmlapi2/search?query='+ game;
   var gameId = 0;
   request(xml, function(err, response, body){
-    if (err){
-      res.json({error: "Sorry!"});
-    }
     parseString(body, function(err, result){
       if(result.items && result.items.item[0]){
         gameId = result.items.item[0].$.id; //Should make it so multiple results come up
